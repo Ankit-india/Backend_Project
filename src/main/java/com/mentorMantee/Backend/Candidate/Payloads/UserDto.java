@@ -1,7 +1,5 @@
 package com.mentorMantee.Backend.Candidate.Payloads;
 
-import java.util.List;
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -17,7 +15,7 @@ public class UserDto {
 	private int id;
 	
 	@NotEmpty
-	@Size(min = 6, message = "User password must be greater than 7")
+	@Size(min = 6, message = "User password must be greater than 6")
 	private String Password;
 	
 	private String name;
