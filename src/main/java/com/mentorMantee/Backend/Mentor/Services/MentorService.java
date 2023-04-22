@@ -8,9 +8,9 @@ public interface MentorService {
 	
 	MentorDto createMentor(MentorDto mentorDto);
 	
-	MentorDto updateMentor(MentorDto mentorDto);
+	MentorDto updateMentor(MentorDto mentorDto, Integer mentorId);
 	
-	MentorDto getMetorById(Integer mentorId);
+	MentorDto getMentorById(Integer mentorId);
 	
 	List<MentorDto> getAllMentor();
 	

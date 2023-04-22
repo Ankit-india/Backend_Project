@@ -29,6 +29,7 @@ public class MentorServiceImpl implements MentorService{
 		MentorDto mentorDto = this.modelMapper.map(mentor, MentorDto.class);
 		return mentorDto;
 	}
+
 	@Override
 	public MentorDto createMentor(MentorDto mentorDto) {
 		// TODO Auto-generated method stub
@@ -38,13 +39,13 @@ public class MentorServiceImpl implements MentorService{
 	}
 
 	@Override
-	public MentorDto updateMentor(MentorDto mentorDto) {
+	public MentorDto updateMentor(MentorDto mentorDto, Integer mentorId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public MentorDto getMetorById(Integer mentorId) {
+	public MentorDto getMentorById(Integer mentorId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
