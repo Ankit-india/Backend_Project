@@ -2,6 +2,7 @@ package com.mentorMantee.Backend.Mentor.Services;
 
 import java.util.List;
 
+import com.mentorMantee.Backend.Mentor.Payloads.ApiResponse;
 import com.mentorMantee.Backend.Mentor.Payloads.MentorDto;
 
 public interface MentorService {
@@ -14,5 +15,5 @@ public interface MentorService {
 	
 	List<MentorDto> getAllMentor();
 	
-	Void deleteMentor(Integer mentorId);
+	ApiResponse deleteMentor(Integer mentorId);
 }

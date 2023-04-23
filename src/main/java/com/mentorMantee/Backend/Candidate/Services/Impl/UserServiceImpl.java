@@ -39,27 +39,26 @@ public class UserServiceImpl implements UserService {
 		return this.userToDto(savedUser);
 	}
 	
-//	@Override
-//	public UserDto updateUser(UserDto userDto, Integer userId) {
-//		User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", " id ", userId));
-//		user.setName(userDto.getName());
-//		user.setPassword(userDto.getPassword());
-//		user.setEmail(userDto.getEmail());
-//		user.setPhoneNumber(userDto.getPhoneNumber());
-//		user.setDpImage(userDto.getDpImage());
-//		user.setYearOfPassing(userDto.getYearOfPassing());
-//		user.setDomain(userDto.getDomain());
-//		user.setTechStack(userDto.getTechStack());
-//		
-//		User updatedUser = this.userRepo.save(user);
-//		UserDto updatedUserDto = this.userToDto(updatedUser);
-//		
-//		return updatedUserDto;
-//	}
+	@Override
+	public UserDto updateUser(UserDto userDto, Integer userId) {
+		User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", " id ", userId));
+		user.setName(userDto.getName());
+		user.setPassword(userDto.getPassword());
+		user.setEmail(userDto.getEmail());
+		user.setPhoneNumber(userDto.getPhoneNumber());
+		user.setDpImage(userDto.getDpImage());
+		user.setYearOfPassing(userDto.getYearOfPassing());
+		user.setDomain(userDto.getDomain());
+		user.setTechStack(userDto.getTechStack());
+
+		User updatedUser = this.userRepo.save(user);
+		UserDto updatedUserDto = this.userToDto(updatedUser);
+
+		return updatedUserDto;
+	}
 
 	@Override
 	public UserDto getUserById(Integer userId) {
-		// TODO Auto-generated method stub
 		User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", " id ", userId));
 		return this.userToDto(user);
 	}
@@ -74,16 +73,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserDto> getAllUser() {
 		List<User> users = this.userRepo.findAll();
-		List<UserDto> userDtos = users.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
-		return userDtos;
+		List<UserDto> listOfUsersDto = users.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
+		return listOfUsersDto;
 	}
-
-	@Override
-	public UserDto updateUser(UserDto user, Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	// creating user
-	
 }

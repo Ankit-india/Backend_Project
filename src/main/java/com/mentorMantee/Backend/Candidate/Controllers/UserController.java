@@ -29,7 +29,7 @@ public class UserController {
 	
 
 	// POST - create user
-	@PostMapping("/")
+	@PostMapping("/createuser")
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
 	{
 		UserDto createdUserDto = this.userService.createUser(userDto);
@@ -37,20 +37,20 @@ public class UserController {
 	}
 	
 	// GET - get all user
-	@GetMapping("/")
+	@GetMapping("/getalluser")
 	public ResponseEntity<List<UserDto>> getAllUser()
 	{
 		return ResponseEntity.ok(this.userService.getAllUser());
 	}
 	// GET - get single user
-	@GetMapping("/{userId}")
+	@GetMapping("/getuserbyid/{userId}")
 	public ResponseEntity<UserDto> getSingleUser(@PathVariable Integer userId)
 	{
 		return ResponseEntity.ok(this.userService.getUserById(userId));
 	}
 	
 	// PUT - update user
-	@PutMapping("/{userId}")
+	@PutMapping("/updateuser/{userId}")
 	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable Integer userId)
 	{
 		UserDto updatedUser = this.userService.updateUser(userDto, userId);
@@ -58,7 +58,7 @@ public class UserController {
 	}
 	
 	// DELETE - delete user
-	@DeleteMapping("/{userId}")
+	@DeleteMapping("/deleteuser/{userId}")
 	public ResponseEntity<CommonApiResponse> deleteUser(@PathVariable("userId") Integer uid)
 	{
 		this.userService.deleteUser(uid);

@@ -1,7 +1,10 @@
 package com.mentorMantee.Backend.Mentor.Services.Impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.mentorMantee.Backend.Candidate.Exceptions.ResourceNotFoundException;
+import com.mentorMantee.Backend.Mentor.Payloads.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +35,6 @@ public class MentorServiceImpl implements MentorService{
 
 	@Override
 	public MentorDto createMentor(MentorDto mentorDto) {
-		// TODO Auto-generated method stub
 		Mentor mentor = this.MentorDtoToMentor(mentorDto);
 		Mentor savedMentor = this.mentorRepo.save(mentor);
 		return this.MentorToMentorDto(savedMentor);
@@ -40,26 +42,36 @@ public class MentorServiceImpl implements MentorService{
 
 	@Override
 	public MentorDto updateMentor(MentorDto mentorDto, Integer mentorId) {
-		// TODO Auto-generated method stub
-		return null;
+		Mentor mentor = this.mentorRepo.findById(mentorId).orElseThrow(() -> new ResourceNotFoundException("mentorId", " mentorId", mentorId));
+		mentor.setName(mentorDto.getName());
+		mentor.setDesignation(mentorDto.getDesignation());
+		mentor.setDomain(mentorDto.getDomain());
+		mentor.setEmail(mentorDto.getEmail());
+		mentor.setExperience(mentorDto.getExperience());
+		mentor.setPassword(mentorDto.getPassword());
+		mentor.setCurrentCompanyName(mentorDto.getCurrentCompanyName());
+		Mentor savedMentor = this.mentorRepo.save(mentor);
+		return this.MentorToMentorDto(savedMentor);
 	}
 
 	@Override
 	public MentorDto getMentorById(Integer mentorId) {
-		// TODO Auto-generated method stub
-		return null;
+		Mentor mentor = this.mentorRepo.findById(mentorId).orElseThrow(() -> new ResourceNotFoundException("mentorId", " mentorId ", mentorId));
+		return this.MentorToMentorDto(mentor);
 	}
 
 	@Override
 	public List<MentorDto> getAllMentor() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Mentor> listOfAllMentor = this.mentorRepo.findAll();
+		List<MentorDto> listOfMentorDto = listOfAllMentor.stream().map(mentor -> this.MentorToMentorDto(mentor)).collect(Collectors.toList());
+		return listOfMentorDto;
 	}
 
 	@Override
-	public Void deleteMentor(Integer mentorId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ApiResponse deleteMentor(Integer mentorId) {
+		Mentor mentor = this.mentorRepo.findById(mentorId).orElseThrow(() -> new ResourceNotFoundException("mentorId", " mentorId ", mentorId));
+		this.mentorRepo.delete(mentor);
+		return new ApiResponse("Mentor Deleted Successfully", true);
 	}
 
 }
